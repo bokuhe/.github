@@ -1,0 +1,99 @@
+name: AI Development Task
+description: A well-scoped implementation task that an AI agent can pick up safely.
+title: "[AI] "
+labels: ["ai-ready"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for tasks that are ready for AI-assisted implementation.
+        Be concrete: the clearer the issue, the safer and faster the agent can work.
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should be true when this task is complete?
+      placeholder: "Example: Show clear error messages for each login failure type."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Background, current behavior, relevant links, or design notes.
+      placeholder: |
+        Currently all login failures show "Something went wrong".
+        Users cannot tell whether the password is wrong or the network failed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements
+      description: Specific implementation requirements. Use checkboxes when possible.
+      placeholder: |
+        - [ ] Show a specific message for invalid credentials.
+        - [ ] Show a different message for network errors.
+        - [ ] Preserve the existing successful login flow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: The conditions that must be met before the task is considered done.
+      placeholder: |
+        - [ ] Relevant tests pass.
+        - [ ] Each failure case displays the expected message.
+        - [ ] Existing login behavior remains unchanged.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested_files
+    attributes:
+      label: Suggested Files
+      description: Files or directories likely to be relevant. This helps the agent start in the right place.
+      placeholder: |
+        - src/auth/login.ts
+        - src/components/LoginForm.tsx
+        - tests/auth/login.test.ts
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and Non-Goals
+      description: Things the agent must not change, compatibility requirements, or decisions that are out of scope.
+      placeholder: |
+        - Do not change the API response schema.
+        - Do not add new runtime dependencies.
+        - Use the existing i18n/message infrastructure.
+
+  - type: textarea
+    id: test_plan
+    attributes:
+      label: Test Plan
+      description: Commands or manual checks the agent should run before opening a PR.
+      placeholder: |
+        - npm test
+        - npm run lint
+        - npm run typecheck
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk Level
+      description: High-risk tasks should usually require explicit human approval before implementation.
+      options:
+        - Low
+        - Medium
+        - High
+      default: 0
+    validations:
+      required: true
