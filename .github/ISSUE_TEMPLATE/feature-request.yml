@@ -1,29 +1,45 @@
 name: Feature Request
-description: Suggest a product or engineering improvement.
+description: Propose a product or engineering improvement that may need planning before implementation.
 title: "[Feature] "
-labels: ["feature"]
+labels: ["enhancement"]
 body:
   - type: textarea
     id: problem
     attributes:
-      label: Problem
-      description: What user problem or workflow gap does this solve?
+      label: Problem / Opportunity
+      description: What user problem, workflow gap, or engineering need does this address?
+      placeholder: "Users cannot ... / Developers currently ..."
     validations:
       required: true
 
   - type: textarea
-    id: proposal
+    id: proposed_solution
     attributes:
       label: Proposed Solution
       description: Describe the desired behavior or implementation direction.
+      placeholder: |
+        The product should ...
+        A likely implementation is ...
     validations:
       required: true
 
   - type: textarea
-    id: alternatives
+    id: scope
     attributes:
-      label: Alternatives Considered
-      description: Other approaches, tradeoffs, or rejected options.
+      label: Initial Scope
+      description: What should the first implementation include?
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-Goals
+      description: What should not be included yet?
+      placeholder: |
+        - Do not ...
+        - Leave ... for a follow-up issue.
 
   - type: textarea
     id: acceptance_criteria
@@ -31,9 +47,15 @@ body:
       label: Acceptance Criteria
       placeholder: |
         - [ ] ...
-        - [ ] ...
+        - [ ] Relevant checks pass.
     validations:
       required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / Tradeoffs
+      description: Other approaches, rejected options, or risks.
 
   - type: dropdown
     id: priority
@@ -44,3 +66,5 @@ body:
         - Medium
         - High
       default: 1
+    validations:
+      required: true

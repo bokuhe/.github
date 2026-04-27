@@ -1,20 +1,34 @@
 name: AI Development Task
-description: A well-scoped implementation task that an AI agent can pick up safely.
+description: A well-scoped implementation task that an AI coding agent can execute safely.
 title: "[AI] "
-labels: ["ai-ready"]
 body:
   - type: markdown
     attributes:
       value: |
-        Use this template for tasks that are ready for AI-assisted implementation.
-        Be concrete: the clearer the issue, the safer and faster the agent can work.
+        Use this for tasks that are ready for AI-assisted implementation.
+
+        Good AI tasks are small, explicit, and reviewable. Include scope, non-goals,
+        acceptance criteria, and the exact checks the agent should run.
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Execution Mode
+      description: How much autonomy should the agent have?
+      options:
+        - Plan only — do not implement yet
+        - Implement with PR — human review required
+        - Implement with PR — auto-merge allowed if repo rules permit
+      default: 1
+    validations:
+      required: true
 
   - type: textarea
     id: goal
     attributes:
       label: Goal
       description: What should be true when this task is complete?
-      placeholder: "Example: Show clear error messages for each login failure type."
+      placeholder: "Example: Users can save an encrypted draft locally and reopen it after app restart."
     validations:
       required: true
 
@@ -22,22 +36,35 @@ body:
     id: context
     attributes:
       label: Context
-      description: Background, current behavior, relevant links, or design notes.
+      description: Background, current behavior, relevant links, or product/design notes.
       placeholder: |
-        Currently all login failures show "Something went wrong".
-        Users cannot tell whether the password is wrong or the network failed.
+        Why this matters:
+        Current behavior:
+        Related docs/issues/PRs:
     validations:
       required: true
 
   - type: textarea
-    id: requirements
+    id: scope
     attributes:
-      label: Requirements
-      description: Specific implementation requirements. Use checkboxes when possible.
+      label: Scope
+      description: What is included in this task? Use checkboxes when possible.
       placeholder: |
-        - [ ] Show a specific message for invalid credentials.
-        - [ ] Show a different message for network errors.
-        - [ ] Preserve the existing successful login flow.
+        - [ ] Add ...
+        - [ ] Update ...
+        - [ ] Add/adjust tests for ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope / Non-Goals
+      description: What must the agent not change in this task?
+      placeholder: |
+        - Do not refactor unrelated files.
+        - Do not change public API contracts unless explicitly listed in Scope.
+        - Do not add dependencies unless justified in the PR.
     validations:
       required: true
 
@@ -45,43 +72,36 @@ body:
     id: acceptance_criteria
     attributes:
       label: Acceptance Criteria
-      description: The conditions that must be met before the task is considered done.
+      description: Conditions that must be met before the task is considered done.
       placeholder: |
-        - [ ] Relevant tests pass.
-        - [ ] Each failure case displays the expected message.
-        - [ ] Existing login behavior remains unchanged.
+        - [ ] User-visible behavior matches the Goal.
+        - [ ] Edge cases listed in Context are handled.
+        - [ ] Relevant tests/checks pass.
+        - [ ] PR explains risks or uncertainties.
     validations:
       required: true
 
   - type: textarea
-    id: suggested_files
+    id: relevant_files
     attributes:
-      label: Suggested Files
-      description: Files or directories likely to be relevant. This helps the agent start in the right place.
+      label: Relevant Files / Docs
+      description: Files, directories, docs, or conventions the agent should read first.
       placeholder: |
-        - src/auth/login.ts
-        - src/components/LoginForm.tsx
-        - tests/auth/login.test.ts
+        - AGENTS.md
+        - docs/architecture.md
+        - src/...
+        - tests/...
 
   - type: textarea
-    id: constraints
+    id: verification
     attributes:
-      label: Constraints and Non-Goals
-      description: Things the agent must not change, compatibility requirements, or decisions that are out of scope.
-      placeholder: |
-        - Do not change the API response schema.
-        - Do not add new runtime dependencies.
-        - Use the existing i18n/message infrastructure.
-
-  - type: textarea
-    id: test_plan
-    attributes:
-      label: Test Plan
-      description: Commands or manual checks the agent should run before opening a PR.
+      label: Verification Plan
+      description: Exact commands or manual checks the agent should run before opening a PR.
       placeholder: |
         - npm test
         - npm run lint
         - npm run typecheck
+        - manual: ...
     validations:
       required: true
 
@@ -89,11 +109,22 @@ body:
     id: risk
     attributes:
       label: Risk Level
-      description: High-risk tasks should usually require explicit human approval before implementation.
+      description: High-risk tasks should usually require explicit human approval before merge.
       options:
-        - Low
-        - Medium
-        - High
+        - Low — localized change, easy rollback
+        - Medium — multiple areas or user-visible behavior
+        - High — data migration, auth/security/crypto, payments, production ops
       default: 0
     validations:
       required: true
+
+  - type: textarea
+    id: agent_notes
+    attributes:
+      label: Agent Notes
+      description: Extra instructions for AI agents.
+      value: |
+        - Keep the diff small and focused on this issue.
+        - Prefer simple, maintainable code over clever abstractions.
+        - If requirements are ambiguous, stop and ask rather than guessing.
+        - In the PR, include a summary, verification results, risks, and any follow-up work.

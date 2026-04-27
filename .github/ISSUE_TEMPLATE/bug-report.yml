@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a reproducible bug.
+description: Report a reproducible bug with enough detail for an AI agent to fix it safely.
 title: "[Bug] "
 labels: ["bug"]
 body:
@@ -8,6 +8,7 @@ body:
     attributes:
       label: Summary
       description: What is broken?
+      placeholder: "When ..., the app/server ... instead of ..."
     validations:
       required: true
 
@@ -17,8 +18,8 @@ body:
       label: Steps to Reproduce
       placeholder: |
         1. Go to ...
-        2. Click ...
-        3. See ...
+        2. Click/run ...
+        3. Observe ...
     validations:
       required: true
 
@@ -46,7 +47,36 @@ body:
         - App version / Commit:
 
   - type: textarea
+    id: suspected_area
+    attributes:
+      label: Suspected Area
+      description: Optional, but helps the agent start in the right place.
+      placeholder: |
+        - src/...
+        - tests/...
+        - docs/...
+
+  - type: textarea
     id: logs
     attributes:
-      label: Logs or Screenshots
-      description: Add logs, screenshots, or error output if available.
+      label: Logs / Screenshots
+      description: Add logs, screenshots, stack traces, or command output if available.
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] Bug is fixed.
+        - [ ] Regression test or verification is added if practical.
+        - [ ] Relevant checks pass.
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / Non-Goals
+      value: |
+        - Keep the fix focused; do not refactor unrelated files.
+        - Do not change public contracts unless the bug requires it and the PR explains why.

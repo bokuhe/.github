@@ -2,38 +2,49 @@
 
 <!-- Briefly describe what changed and why. -->
 
-## Related Issue
+## Linked Issue
 
+<!-- Use Closes #123 when appropriate. -->
 Closes #
 
-## Changes
+## Scope
 
-- 
-- 
+<!-- What is included in this PR? -->
 - 
 
-## Test Results
+## Out of Scope
 
+<!-- What intentionally remains unchanged or deferred? -->
+- 
+
+## Verification
+
+<!-- Paste exact commands and results. If a check was not run, explain why. -->
 - [ ] Tests pass
 - [ ] Lint passes
 - [ ] Typecheck passes
+- [ ] Build/smoke check passes, if applicable
 - [ ] Manual checks completed, if applicable
 
-Command output:
+Commands run:
 
 ```txt
-<!-- Paste relevant command results here. -->
+
 ```
 
-## Reviewer Notes
+## Risk / Rollback
 
-<!-- Call out the areas that need the closest review. -->
+- Risk level: Low / Medium / High
+- Main risk:
+- Rollback plan:
 
-## Risk
+## AI Agent Checklist
 
-- [ ] Low
-- [ ] Medium
-- [ ] High
+- [ ] Diff is focused on the linked issue/task
+- [ ] No unrelated refactor or dependency change
+- [ ] User-facing behavior is covered by tests or a manual verification note
+- [ ] Docs/contracts/configs were updated if behavior changed
+- [ ] Follow-up work is called out explicitly
 
 ## Screenshots / Logs
 
